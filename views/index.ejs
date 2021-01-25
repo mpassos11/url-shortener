@@ -3,39 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URL Shrinker</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>URL Shrinker</h1>
-    <form action="/shortUrls" method="post">
-        <label for="fullUrl">URL</label>
-        <input type="url" name="fullUrl" id="fullUrl">
-        <button type="submit">Shrink</button>
-    </form>
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-header">
+                <h1>URL Shrinker</h1>
+            </div>
+            <div class="card-body">
+                <form action="/shortUrls" method="post" class="my-4 form-inline">
+                    <label for="fullUrl" class="sr-only">URL</label>
+                    <input type="text" name="fullUrl" id="fullUrl" class="form-control col mr-2" placeholder="URL">
+                    <button class="btn btn-success" type="submit">Shrink</button>
+                </form>
+            </div>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
+        <table class="table table-striped">
+            <thead>
                 <th>Full URL</th>
                 <th>Short URL</th>
                 <th>Clicks</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% shortUrls.forEach(shortUrl => { %>
-                <tr>
-                    <td>
-                        <a href="<%= shortUrl.full %>"><%= shortUrl.full %></a>
-                    </td>
-                    <td>
-                        <a href="<%= shortUrl.short %>"><%= shortUrl.short %></a>
-                    </td>
-                    <td>
-                        <%= shortUrl.clicks %>
-                    </td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                        <td>
+                            <a href="<%= shortUrl.full %>"><%= shortUrl.full %></a>
+                        </td>
+                        <td>
+                            <a target="_blank" href="<%= shortUrl.short %>"><%= shortUrl.short %></a>
+                        </td>
+                        <td>
+                            <%= shortUrl.clicks %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <div class="container">
+                <span class="text-muted">Developed by <a href="https://github.com/mpassos11/url-shortener">Matheus Passos</a></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
